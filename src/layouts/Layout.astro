@@ -1,12 +1,19 @@
+---
+import { ClientRouter } from "astro:transitions";
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="stylesheet" href="/src/css/style.css"/>
 		<title>Slavencer's porfolio</title>
+		<ClientRouter/>
 	</head>
 	<body>
+		<nav><slot name="navigation"/></nav>
 		<slot />
 	</body>
 </html>
