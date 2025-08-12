@@ -1,4 +1,5 @@
 ---
+import { fade } from 'astro:transitions';
 import Links from '../components/Links.astro';
 import Navigation from '../components/Navigation.astro';
 import Layout from '../layouts/Layout.astro';
@@ -6,5 +7,5 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
 	<Navigation slot="navigation"/>
-	<Links/>
+	<Links transition:animate={fade({duration:"0.4s"})}/>
 </Layout>
