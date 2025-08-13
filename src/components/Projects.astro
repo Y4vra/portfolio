@@ -1,5 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
+import { type CollectionEntry } from "astro:content";
+
 import { fade } from 'astro:transitions';
 
 const projects = await getCollection('projects');
@@ -10,14 +12,15 @@ const hasProjects = projects.length > 0;
     <h2>My Projects</h2>
     {hasProjects ? (
     <div class="project-grid">
-        {projects.map(({ data, slug }) => (
-        <article class="project-card" id={slug}>
-            <img src={data.image} alt={data.title} />
-            <h2>{data.title}</h2>
-            <p>{data.description}</p>
-            <a class="button">More...</a>
-        </article>
-        ))}
+        {projects.map((project: CollectionEntry<"projects">) => 
+            (
+                <article id={project.id} class="project-card">
+                    <img src={project.data.image} alt={project.data.title} />
+                    <h2>{project.data.title}</h2>
+                    <p>{project.data.description}</p>
+                    <a class="button">More...</a>
+                </article>)
+        )}
     </div>
     ) : (
     <p>No projects found. Check back later!</p>
