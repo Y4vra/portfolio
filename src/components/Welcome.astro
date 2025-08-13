@@ -5,16 +5,30 @@ import background from '../assets/background.svg';
 ---
 
 <div class="container" transition:animate={fade({duration:"0.4s"})}>
+	<style>
+		div{
+			display: flex;
+			flex-direction: row;
+		}
+		section{
+			width: 50%;
+		}
+	</style>
 	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<section class="centered">
-		<h1>
-			What do you wish to see?
-		</h1>
-		<section id="links">
-			<a class="button" href="projects">Projects</a>
-			<a class="button" href="about">About me</a>
-			<a class="button" href="socials">Contact info and other networks</a>
-		</section>
+	<section class="container centered">
+		<h1>Hi, I'm Javier Carrasco Arango</h1>
+		<p>Aspiring software engineer passionate in full stack development, cybersecurity, and team leadership. I'm dedicated to lifelong learning.</p>
+	</section>
+	<section class="container centered">
+		<style>
+			.button{
+				margin:1rem;
+				width:50%;
+			}
+		</style>
+		<a class="button" href="porfolio">Projects</a>
+		<a class="button" href="about">About me</a>
+		<a class="button" href="socials">Contact info and other networks</a>
 	</section>
 </div>
 
