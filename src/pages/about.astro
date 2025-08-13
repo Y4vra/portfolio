@@ -4,14 +4,18 @@ import Layout from '../layouts/Layout.astro';
 import AboutMd from '../md/about.md';
 import background from '../assets/background.svg';
 import { fade } from 'astro:transitions';
+import "../styles/global.css";
 ---
 
 <Layout>
     <img id="background" src={background.src} alt="" fetchpriority="high" />
 	<Navigation slot="navigation"/>
-    <main transition:animate={fade({duration:"0.4s"})}>
-        <article class="container">
-            <AboutMd />
-        </article>
-    </main>
+    <article class="container" transition:animate={fade({duration:"0.4s"})}>
+        <style>
+            article{
+                margin: 5%;
+            }
+        </style>
+        <AboutMd />
+    </article>
 </Layout>
