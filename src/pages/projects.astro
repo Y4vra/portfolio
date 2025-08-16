@@ -5,11 +5,11 @@ import Layout from '../layouts/Layout.astro';
 import background from '../assets/background.svg';
 import "../styles/global.css";
 
-import Projects from '../components/Projects.astro';
+import ProjectBoard from '../components/ProjectBoard.astro';
 ---
 
 <Layout>
     <img id="background" src={background.src} alt="" fetchpriority="high" />
 	<Navigation slot="navigation"/>
-    <Projects/>
+    <ProjectBoard/>
 </Layout>
