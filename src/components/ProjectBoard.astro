@@ -12,17 +12,35 @@ const hasProjects = projects.length > 0;
     <h2>My Projects</h2>
     {hasProjects ? (
     <div class="project-grid">
+        <style>
+            .project-card {
+                background-color: #fff;
+                border-radius: 0.5rem; /* Border radius in rem */
+                box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Raised effect with rem */
+                padding: 1.5rem; /* Padding inside the card */
+                transition: transform 0.2s, box-shadow 0.2s; /* Smooth transition for hover */
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .project-card:hover {
+                transform: translateY(-0.25rem); /* Lift effect */
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+            }
+        </style>
         {projects.map((project: CollectionEntry<"projects">) => 
-            (
-                <article id={project.id} class="project-card">
-                    <img src={project.data.image} alt={project.data.title} />
-                    <h2>{project.data.title}</h2>
-                    <p>{project.data.description}</p>
-                    <a class="button">More...</a>
-                </article>)
+            (<article id={project.id} class="project-card">
+                <img src={project.data.image} alt={project.data.title} />
+                <h2>{project.data.title}</h2>
+                <p>{project.data.description}</p>
+                <a class="button" href={project.data.link}>More...</a>
+            </article>
+            )
         )}
     </div>
     ) : (
     <p>No projects found. Check back later!</p>
-    )}
+    )
+    }
 </div>
