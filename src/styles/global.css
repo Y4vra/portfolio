@@ -19,6 +19,8 @@ html,body {
 
 .container {
 	height: 100%;
+	display:flex;
+	flex-wrap: wrap;
 }
 
 main {
@@ -32,11 +34,6 @@ main {
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
-}
-
-h1 {
-	font-size: x-large;
-	margin-top: 0.25em;
 }
 
 nav{
@@ -93,6 +90,12 @@ a.button:hover {
 	box-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.15);
 }
 
+h1 {
+	font-size: x-large;
+	margin-top: 0.25em;
+	width: 100%;
+}
+
 h2 {
 	margin: 0.5rem 0 1rem;
 	font-weight: normal;
@@ -106,23 +109,6 @@ p {
 	line-height: 24px;
 	letter-spacing: -0.006em;
 	margin: 0;
-}
-
-code {
-	display: inline-block;
-	background:
-		linear-gradient(66.77deg, #f3cddd 0%, #f5cee7 100%) padding-box,
-		linear-gradient(155deg, #d83333 0%, #f041ff 18%, #f5cee7 45%) border-box;
-	border-radius: 8px;
-	border: 1px solid transparent;
-	padding: 6px 8px;
-}
-
-.box {
-	padding: 16px;
-	background: rgba(255, 255, 255, 1);
-	border-radius: 16px;
-	border: 1px solid white;
 }
 
 @media screen and (max-width: 768px) {

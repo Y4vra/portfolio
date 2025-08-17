@@ -10,9 +10,10 @@ import "../styles/global.css";
 <Layout>
     <img id="background" src={background.src} alt="" fetchpriority="high" />
 	<Navigation slot="navigation"/>
-    <article class="container" transition:animate={fade({duration:"0.4s"})}>
+    <article class="centered" transition:animate={fade({duration:"0.4s"})}>
         <style>
             article{
+                align-items: start;
                 margin: 5%;
             }
         </style>
