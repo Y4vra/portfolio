@@ -8,17 +8,23 @@ const projects = await getCollection('projects');
 const hasProjects = projects.length > 0;
 ---
 
-<div class="container centered" transition:animate={fade({duration:"0.4s"})}>
+<div class="container" transition:animate={fade({duration:"0.4s"})}>
     <h1>My Projects</h1>
     {hasProjects ? (
     <div class="project-grid container">
         <style>
+            div{
+                flex-wrap: wrap;
+                align-items: center;
+                justify-content: center;
+            }
             .project-card {
-                width: 30%;
+                width: 28%;
                 background-color: #fff;
                 border-radius: 0.5rem; 
                 box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); 
-                padding: 1.5rem; 
+                padding: 1.5%;
+                margin:1%;
                 transition: transform 0.2s, box-shadow 0.2s; 
                 display: flex;
                 flex-direction: column;

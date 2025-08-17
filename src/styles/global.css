@@ -19,12 +19,14 @@ html,body {
 
 .container {
 	height: 100%;
+	width: 100%;
 	display:flex;
 	flex-wrap: wrap;
 }
 
 main {
 	height: 100%;
+	width: 90%;
 	display: flex;
 	justify-content: center;
 }
@@ -114,9 +116,5 @@ p {
 @media screen and (max-width: 768px) {
 	main{
 		width: 90%;
-	}
-	.container {
-		display: flex;
-		flex-direction: column;
 	}
 }
