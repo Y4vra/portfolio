@@ -46,7 +46,7 @@ const hasProjects = projects.length > 0;
         </style>
         {projects.map((project: CollectionEntry<"projects">) => 
             (<article id={project.id} class="project-card">
-                <img src={project.data.image} alt="no image provided" />
+                <img src={import.meta.env.BASE_URL+project.data.image} alt="no image provided" />
                 <h2>{project.data.title}</h2>
                 <p>{project.data.description}</p>
                 <a class="button" href={project.data.link}>More...</a>
