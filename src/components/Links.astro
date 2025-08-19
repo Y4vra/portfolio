@@ -1,6 +1,10 @@
 ---
 import { fade } from 'astro:transitions';
 import background from '../assets/background.svg';
+import githubImage from '../assets/github-logo.svg';
+import linkedinImage from '../assets/linkedin-logo.svg';
+import leetcodeImage from '../assets/leetcode-logo.svg';
+import signalImage from '../assets/signal-logo.svg';
 
 const githubUrl = "https://github.com/Slavencer";
 const linkedinUrl = "https://www.linkedin.com/in/javiercarrascoarango";
@@ -21,24 +25,24 @@ const signalUrl = "https://signal.me/#eu/-gnbaFEXeBNhNFGqMfudDoDDlm3wNsL8Lp9-wxs
 	<section class="container centered">
 		<!-- GitHub -->
 		<a class="button" href={githubUrl} target="_blank" rel="noopener noreferrer">
-			<img alt="github logo" src="/src/assets/github-logo.svg"/>
+			<img alt="github logo" src={githubImage.src}/>
 			GitHub
 		</a>
 
 		<!-- LinkedIn -->
 		<a class="button" href={linkedinUrl} target="_blank" rel="noopener noreferrer">
-			<img alt="LinkedIn logo" src="/src/assets/linkedin-logo.svg"/>
+			<img alt="LinkedIn logo" src={linkedinImage.src}/>
 			LinkedIn
 		</a>
 
 		<!-- LeetCode -->
 		<a class="button" href={leetcodeUrl} target="_blank" rel="noopener noreferrer">
-			<img alt="Leetcode logo" src="/src/assets/leetcode-logo.svg"/>
+			<img alt="Leetcode logo" src={leetcodeImage.src}/>
 			LeetCode
 		</a>
 		<!-- Signal -->
 		<a class="button" href={signalUrl} target="_blank" rel="noopener noreferrer">
-			<img alt="Signal logo" src="/src/assets/signal-logo.svg"/>
+			<img alt="Signal logo" src={signalImage.src}/>
 			Signal
 		</a>
 	</section>
