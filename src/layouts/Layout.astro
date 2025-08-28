@@ -1,5 +1,4 @@
 ---
-import { ClientRouter } from "astro:transitions";
 
 ---
 
@@ -9,13 +8,15 @@ import { ClientRouter } from "astro:transitions";
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href={import.meta.env.BASE_URL+"/favicon.svg"} />
-		<title>Slavencer's porfolio</title>
-		<ClientRouter/>
+		<title>Y4vra's porfolio</title>
 	</head>
 	<body>
 		<slot name="navigation"/>
 		<main>
-			<slot />
+			<slot id="welcomeSection" name="presentation"/>
+			<slot id="porfolioSection" name="projects"/>
+			<slot id="contactSection" name="contact"/>
+			<slot id="aboutMeSection" name="about"/>
 		</main>
 	</body>
 </html>

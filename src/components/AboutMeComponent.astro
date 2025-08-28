@@ -1,0 +1,16 @@
+---
+import AboutMd from '../md/about.md';
+import { fade } from 'astro:transitions';
+import "../styles/global.css";
+---
+
+<article class="centered" transition:animate={fade({duration:"0.4s"})}>
+    <style>
+        article{
+            align-items: start;
+            margin: 5%;
+            justify-content: flex-start;
+        }
+    </style>
+    <AboutMd />
+</article>
