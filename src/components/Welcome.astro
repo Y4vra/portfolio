@@ -1,34 +1,11 @@
 ---
 import { fade } from 'astro:transitions';
-import astroLogo from '../assets/astro.svg';
-import background from '../assets/background.svg';
 ---
 
 <div class="container" transition:animate={fade({duration:"0.4s"})}>
-	<style>
-		div{
-			display: flex;
-			flex-direction: row;
-		}
-		section{
-			width: 50%;
-		}
-	</style>
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
 	<section class="container centered">
 		<h1>Hi, I'm Javier Carrasco Arango</h1>
 		<p>Aspiring software engineer passionate in full stack development, cybersecurity, and team leadership. I'm dedicated to lifelong learning.</p>
-	</section>
-	<section class="container centered">
-		<style>
-			.button{
-				margin:1rem;
-				width:50%;
-			}
-		</style>
-		<a class="button" href={import.meta.env.BASE_URL+"/projects"}>Projects</a>
-		<a class="button" href={import.meta.env.BASE_URL+"/about"}>About me</a>
-		<a class="button" href={import.meta.env.BASE_URL+"/socials"}>Contact info and other networks</a>
 	</section>
 </div>
 

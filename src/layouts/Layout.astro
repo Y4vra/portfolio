@@ -1,5 +1,6 @@
 ---
 
+import background from '../assets/background.svg';
 ---
 
 <!doctype html>
@@ -12,11 +13,12 @@
 	</head>
 	<body>
 		<slot name="navigation"/>
+		<img id="background" src={background.src} alt="" fetchpriority="high" />
 		<main>
-			<slot id="welcomeSection" name="presentation"/>
-			<slot id="porfolioSection" name="projects"/>
-			<slot id="contactSection" name="contact"/>
-			<slot id="aboutMeSection" name="about"/>
+			<slot id="start" name="start"/>
+			<slot id="porfolio" name="projects"/>
+			<slot id="about" name="about"/>
+			<slot id="contact" name="contact"/>
 		</main>
 	</body>
 </html>
