@@ -2,9 +2,13 @@
 import { defineConfig } from 'astro/config';
 
 
+import react from '@astrojs/react';
+
+
 // https://astro.build/config
 export default defineConfig({
-    site:'https://slavencer.github.io',
-    base:'porfolio',
-    trailingSlash: 'ignore',
+  site:'https://slavencer.github.io',
+  base:'porfolio',
+  trailingSlash: 'ignore',
+  integrations: [react()],
 });
