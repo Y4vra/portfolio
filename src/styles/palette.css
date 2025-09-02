@@ -1,0 +1,44 @@
+:root{
+    --color-bg: #090040;
+    --color-surface: #471396;
+    --color-primary: #B13BFF;
+    --color-accent: #00E0B8;
+    --color-text: #eaeaea;
+    --color-muted: #999999;
+
+    --color-code-bg: #1d0c4c;
+    --color-code-text: #f1f1f1;
+}
+body {
+    color: var(--color-text);
+    background-color: var(--color-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--color-primary);
+}
+pre, code {
+    background-color: var(--color-code-bg);
+    color: var(--color-code-text);
+}
+.button{
+    background-color: var(--color-accent);
+    color: var(--color-surface);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.button:hover,.button:focus {
+    background-color: var(--color-primary);
+    transform: translateY(-1px);
+}
+.button.active {
+    transform: translateY(1rem);
+    background-color: var(--color-surface);
+    color:var(--color-accent);
+}
+.navBar{
+	background-image: linear-gradient(to bottom, #060020 70%, #0000);
+	transition: all 1s cubic-bezier(.165,.84,.44,1);
+}
+.project-card{
+    background-color: var(--color-bg);
+}

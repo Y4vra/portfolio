@@ -12,41 +12,6 @@ const hasProjects = projects.length > 0;
     <h1>My Projects</h1>
     {hasProjects ? (
     <div class="project-grid container">
-        <style>
-            div{
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .project-card {
-                width: 28%;
-                height: 70%;
-                background-color: #fff;
-                border-radius: 0.7rem; 
-                box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); 
-                padding: 1.5%;
-                margin:1%;
-                transition: transform 0.2s, box-shadow 0.2s; 
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-            }
-            .project-card > p{
-                flex-grow:1;
-            }
-            .project-card > img{
-                width: 70%;
-                margin: 0% 15%;
-            }
-            
-            @media screen and (max-width: 768px) {
-                .project-card {
-                    width:90%;
-                }
-                .project-grid{
-                    align-items: center;
-                }
-            }
-        </style>
         {projects.map((project: CollectionEntry<"projects">) => 
             (<article id={project.id} class="project-card">
                 <img src={import.meta.env.BASE_URL+project.data.image} alt="no image provided" />
