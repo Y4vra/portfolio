@@ -50,29 +50,28 @@ a.button{
 	justify-content: center;
 }
 .navBar{
-	transition: all 1s cubic-bezier(.165,.84,.44,1);
 	position: fixed;
 	top: 0;
 	z-index: 2;
 	display:grid;
 	grid-template-rows: repeat(4,1fr);
-	grid-template-columns: repeat(3,1fr);
+	grid-template-columns: repeat(2,1fr) 4rem;
 	height: 100%;
 	width: 18%;
 	padding: 0 0 0 2%;
+	transition: all 1s cubic-bezier(.165,.84,.44,1);
 }
 .navBar.open{
 	left: 0;
 }
 .navBar.closed{
-	left: -14%;
+	left: -15%;
 }
 .navBar > h1.nav-link{
 	grid-column: 1;
 	grid-column: 1;
 }
 .navBar > button{
-	margin:1rem;
 	background-size: contain;
 	border: none;
 	background-repeat: no-repeat;
@@ -119,7 +118,8 @@ a.button{
 	filter: drop-shadow(0 0 1.5rem #fffffff0);
 }
 section.container{
-	min-height: 100vh;
+	min-height: 98vh;
+	padding: 2vh;
 }
 section#contact{
 	row-gap: 2rem;
@@ -143,10 +143,32 @@ section#contact img{
 	.project-grid{
 		align-items: center;
 	}
+	section#contact a{
+		width:50%;
+	}
 	.navBar{
-		width:25%;
+		top:auto;
+		border-radius: 2rem;
+		height: 50%;
+		bottom:0;
+		width:80%;
+	}
+	.navBar.open{
+		left:auto;
+		bottom:0;
+	}
+	.navBar.closed{
+		left:auto;
+		bottom: -38%;
+	}
+	.navBar.open > button{
+		background-image: url("/src/assets/sidebarDown.svg");
+	}
+	.navBar.closed > button{
+		background-image: url("/src/assets/sidebarUp.svg");
 	}
 	main{
-		margin-left:25%;
+		margin-left:0;
+		width:95%;
 	}
 }
