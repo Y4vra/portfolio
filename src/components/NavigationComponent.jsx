@@ -1,14 +1,8 @@
 import { useEffect, useState } from 'react';
 
 export default function NavBar() {
-  const [activeHash, setActiveHash] = useState(window.location.hash || '#start');
+  const [activeHash, setActiveHash] = useState("#start");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const navItems = [
-    { label: 'Projects', hash: '#portfolio' },
-    { label: 'About', hash: '#about' },
-    { label: 'Contact', hash: '#contact' },
-  ];
 
   useEffect(() => {
     const onHashChange = () => {
