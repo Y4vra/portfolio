@@ -155,11 +155,11 @@ section#contact img{
 	}
 	.navBar.open{
 		left:auto;
-		bottom:0;
+		bottom: -38%;
 	}
 	.navBar.closed{
 		left:auto;
-		bottom: -38%;
+		bottom:0;/*easiest way to invert behaviour on the phone*/
 	}
 	.navBar.open > button{
 		background-image: url("/src/assets/sidebarDown.svg");
