@@ -25,6 +25,10 @@ pre, code {
     background-color: var(--color-code-bg);
     color: var(--color-code-text);
 }
+.navBar > .button{
+    color:var(--color-primary);
+	background-color: #00000000;
+}
 .button{
     background-color: var(--color-accent);
     color: var(--color-surface);
@@ -40,7 +44,7 @@ pre, code {
     color:var(--color-accent);
 }
 .navBar{
-	background-image: linear-gradient(to bottom, #060020 70%, #0000);
+	background-color: var(--color-code-bg) ;
 	transition: all 1s cubic-bezier(.165,.84,.44,1);
 }
 .project-card{
