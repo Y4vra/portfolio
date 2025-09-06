@@ -44,9 +44,10 @@ div{
 .project-card > p{
 	flex-grow:1;
 }
-.project-card > img{
+.project-image{
 	width: 70%;
-	margin: 0% 15%;
+	padding: 2% 15%;
+	filter: drop-shadow(0 0 1.5rem rgba(255, 255, 255, 0.8));
 }
 a.button{
 	border-radius: .5rem;
