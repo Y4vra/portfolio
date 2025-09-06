@@ -25,14 +25,19 @@ export default function NavBar() {
       main.classList.remove('unshifted');
     }
   }
+  const linkClickSidebarCheck = ()=>{
+    if(window.innerWidth<768){
+      toggleSidebar();
+    }
+  }
 
   return (
     <nav class={sidebarOpen?"open navBar":"closed navBar"}>
       <h1><a class="nav-link" href="#start">Y4vra</a></h1>
       <button id="sidebarToggle" onClick={toggleSidebar}></button>
-      <a class={`nav-link ${activeHash === "#portfolio" ? "active button" : "button"}`} href="#portfolio">Projects</a>
-      <a class={`nav-link ${activeHash === "#about" ? "active button" : "button"}`} href="#about">About</a>
-      <a class={`nav-link ${activeHash === "#contact" ? "active button" : "button"}`} href="#contact">Contact</a>
+      <a onClick={linkClickSidebarCheck} class={`nav-link ${activeHash === "#portfolio" ? "active button" : "button"}`} href="#portfolio">Projects</a>
+      <a onClick={linkClickSidebarCheck} class={`nav-link ${activeHash === "#about" ? "active button" : "button"}`} href="#about">About</a>
+      <a onClick={linkClickSidebarCheck} class={`nav-link ${activeHash === "#contact" ? "active button" : "button"}`} href="#contact">Contact</a>
     </nav>
   );
 }
