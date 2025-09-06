@@ -32,6 +32,9 @@ pre, code {
     color: var(--color-text-secondary);
 	background-color: #00000000;
 }
+.navBar > button{
+    background-color: var(--transparent);
+}
 .navBar > .nav-link:hover{
     color:var(--color-accent);
 }
@@ -51,7 +54,6 @@ pre, code {
 }
 .navBar{
 	background-color: var(--color-bg) ;
-	transition: all 1s cubic-bezier(.165,.84,.44,1);
 }
 section#contact .button{
     color: var(--color-accent);
