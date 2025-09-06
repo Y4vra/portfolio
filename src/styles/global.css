@@ -21,6 +21,7 @@ html,body {
 main{
 	margin-left:20%;
 	width: 90%;
+	padding-bottom: 3rem;
 }
 img{
 	width: 100%;
@@ -29,6 +30,35 @@ img{
 div{
 	flex-wrap: wrap;
 	justify-content: center;
+}
+a.button{
+	border-radius: .5rem;
+	text-decoration: none;
+	padding: 2% 5%;
+	align-items: center;
+	width:90%;
+	height: 96%;
+}
+.centered{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.navBar{
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	display:grid;
+	grid-template-rows: repeat(4,1fr);
+	height: 100%;
+	width: 18%;
+	padding: 0 0 0 2%;
+}
+.navBar > .nav-link{
+	height: 2rem;
+	width: 80%;
 }
 .project-card {
 	width: 28%;
@@ -50,37 +80,22 @@ div{
 	padding: 2% 15%;
 	filter: drop-shadow(0 0 1.5rem #fffffff0);
 }
-a.button{
-	border-radius: .5rem;
-	text-decoration: none;
-	padding: 2% 5%;
-	align-items: center;
-	width:90%;
-	height: 96%;
-}
-.centered{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-.navBar{
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 2;
-	display:grid;
-	grid-template-rows: repeat(4,1fr);
-	height: 100%;
-	width: 18%;
-	padding: 0 0 0 2%;
-}
-.navBar > .nav-link{
-	height: 2rem;
-	width: 80%;
-}
-
 section.container{
-	padding-top:15%;
+	min-height: 100vh;
+}
+section#contact{
+	row-gap: 2rem;
+}
+section#contact a{
+	display: flex;
+	gap: 1rem;
+	width:30%;
+	align-items: center;
+	justify-content: center;
+}
+section#contact img{
+	height: 2rem;
+	width: 2rem;
 }
 
 @media screen and (max-width: 768px) {
@@ -89,5 +104,11 @@ section.container{
 	}
 	.project-grid{
 		align-items: center;
+	}
+	.navBar{
+		width:25%;
+	}
+	main{
+		margin-left:25%;
 	}
 }

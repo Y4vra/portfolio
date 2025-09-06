@@ -1,6 +1,4 @@
 ---
-import { fade } from 'astro:transitions';
-import background from '../assets/background.svg';
 import githubImage from '../assets/github-logo.svg';
 import linkedinImage from '../assets/linkedin-logo.svg';
 import leetcodeImage from '../assets/leetcode-logo.svg';
@@ -11,37 +9,27 @@ const linkedinUrl = "https://www.linkedin.com/in/javiercarrascoarango";
 const leetcodeUrl = "https://www.leetcode.com/slavencer";
 const signalUrl = "https://signal.me/#eu/-gnbaFEXeBNhNFGqMfudDoDDlm3wNsL8Lp9-wxskdujg7n359tNPd4hCf2Tyb5wC";
 ---
+<section id="contact" class="container centered">
+	<!-- GitHub -->
+	<a class="button" href={githubUrl} target="_blank" rel="noopener noreferrer">
+		<img alt="github logo" src={githubImage.src} aria-hidden="true" />
+		<span>GitHub</span>
+	</a>
 
-<section id="contact" class="container" transition:animate={fade({duration:"0.4s"})}>
-	<img id="background" src={background.src} alt="" fetchpriority="high" />
-	<style>
-		img{
-			height: 2rem;
-			width: 2rem;
-		}
-	</style>
-	<section class="container centered">
-		<!-- GitHub -->
-		<a class="button" href={githubUrl} target="_blank" rel="noopener noreferrer">
-			<img alt="github logo" src={githubImage.src}/>
-			GitHub
-		</a>
+	<!-- LinkedIn -->
+	<a class="button" href={linkedinUrl} target="_blank" rel="noopener noreferrer">
+		<img alt="LinkedIn logo" src={linkedinImage.src} aria-hidden="true" />
+		<span>LinkedIn</span>
+	</a>
 
-		<!-- LinkedIn -->
-		<a class="button" href={linkedinUrl} target="_blank" rel="noopener noreferrer">
-			<img alt="LinkedIn logo" src={linkedinImage.src}/>
-			LinkedIn
-		</a>
-
-		<!-- LeetCode -->
-		<a class="button" href={leetcodeUrl} target="_blank" rel="noopener noreferrer">
-			<img alt="Leetcode logo" src={leetcodeImage.src}/>
-			LeetCode
-		</a>
-		<!-- Signal -->
-		<a class="button" href={signalUrl} target="_blank" rel="noopener noreferrer">
-			<img alt="Signal logo" src={signalImage.src}/>
-			Signal
-		</a>
-	</section>
-</div>
+	<!-- LeetCode -->
+	<a class="button" href={leetcodeUrl} target="_blank" rel="noopener noreferrer">
+		<img alt="Leetcode logo" src={leetcodeImage.src} aria-hidden="true"/>
+		<span>LeetCode</span>
+	</a>
+	<!-- Signal -->
+	<a class="button" href={signalUrl} target="_blank" rel="noopener noreferrer">
+		<img alt="Signal logo" src={signalImage.src} aria-hidden="true"/>
+		<span>Signal</span>
+	</a>
+</section>

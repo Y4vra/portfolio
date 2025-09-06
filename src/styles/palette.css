@@ -25,9 +25,12 @@ pre, code {
     background-color: var(--color-code-bg);
     color: var(--color-code-text);
 }
-.navBar > .button{
+.navBar > .nav-link{
     color:var(--color-primary);
 	background-color: #00000000;
+}
+.navBar > .nav-link:hover{
+    color:var(--color-accent);
 }
 .button{
     background-color: var(--color-accent);
@@ -49,4 +52,7 @@ pre, code {
 }
 .project-card{
     background-color: var(--color-bg);
+}
+.button img{
+    color: var(--color-surface);
 }
