@@ -1,13 +1,16 @@
 :root{
     --color-bg: #090040;
+    --color-bg-secondary: #1d0c4c;
     --color-surface: #471396;
     --color-primary: #B13BFF;
     --color-accent: #00E0B8;
     --color-text: #eaeaea;
-    --color-muted: #999999;
+    --color-text-secondary: #dcc6e0;
 
     --color-code-bg: #1d0c4c;
     --color-code-text: #f1f1f1;
+
+    --transparent:#00000000;
 }
 body {
     color: var(--color-text);
@@ -26,7 +29,7 @@ pre, code {
     color: var(--color-code-text);
 }
 .navBar > .nav-link{
-    color:var(--color-primary);
+    color: var(--color-text-secondary);
 	background-color: #00000000;
 }
 .navBar > .nav-link:hover{
@@ -47,8 +50,12 @@ pre, code {
     color:var(--color-accent);
 }
 .navBar{
-	background-color: var(--color-code-bg) ;
+	background-color: var(--color-bg) ;
 	transition: all 1s cubic-bezier(.165,.84,.44,1);
+}
+section#contact .button{
+    color: var(--color-accent);
+	background-color: var(--color-surface);
 }
 .project-card{
     background-color: var(--color-bg);
