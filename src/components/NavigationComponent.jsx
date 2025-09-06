@@ -5,6 +5,7 @@ export default function NavBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
+    setActiveHash(window.location.hash || '#start');
     const onHashChange = () => {
       setActiveHash(window.location.hash || '#start');
     };
