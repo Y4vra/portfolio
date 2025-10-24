@@ -25,7 +25,8 @@ main{
 	transition: all 1s cubic-bezier(.165,.84,.44,1);
 }
 main.unshifted{
-	margin-left:0;
+	margin-left:5%;
+	width: 95%;
 }
 img{
 	width: 100%;
@@ -119,7 +120,8 @@ a.button{
 }
 section.container{
 	min-height: 98vh;
-	padding: 2vh;
+	padding: 2rem;
+	width: 100%-2rem;
 }
 section#contact{
 	row-gap: 2rem;
@@ -168,7 +170,11 @@ section#contact img{
 		background-image: url("/src/assets/sidebarUp.svg");
 	}
 	main{
-		margin-left:0;
-		width:95%;
+		margin:0;
+		width:100%;
+	}
+	main.unshifted{
+		margin:0;
+		width:100%;
 	}
 }

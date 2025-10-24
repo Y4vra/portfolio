@@ -65,3 +65,6 @@ section#contact .button{
 .button img{
     color: var(--color-surface);
 }
+section#about{
+    background-color: var(--color-bg);
+}

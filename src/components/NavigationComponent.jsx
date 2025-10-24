@@ -12,8 +12,28 @@ export default function NavBar() {
     };
 
     window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
+    const sections = document.querySelectorAll('section[id]');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            setActiveHash(`#${id}`);
+            history.replaceState(null, '', `#${id}`); // keep hash in URL
+          }
+        });
+      },
+      { threshold: 0.5 } // 50% visible = active
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => {
+      window.removeEventListener('hashchange', onHashChange);
+      sections.forEach((section) => observer.unobserve(section));
+    };
   }, []);
+  
   const toggleSidebar =()=>{
     setSidebarOpen(!sidebarOpen)
 
