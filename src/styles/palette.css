@@ -68,3 +68,6 @@ section#contact .button{
 section#about{
     background-color: var(--color-bg);
 }
+.text-rotate-rotatingText{
+    background-color: var(--color-primary);
+}
