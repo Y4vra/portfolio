@@ -1,70 +1,41 @@
-:root{
-    --color-bg: #090040;
-    --color-bg-secondary: #1d0c4c;
-    --color-surface: #471396;
-    --color-primary: #B13BFF;
-    --color-accent: #00E0B8;
-    --color-text: #eaeaea;
-    --color-text-secondary: #dcc6e0;
+@import "tailwindcss";
 
-    --color-code-bg: #1d0c4c;
-    --color-code-text: #f1f1f1;
+@theme {
+  --color-light-main-50: rgb(250 250 252);
+  --color-light-main-100: rgb(240 240 244);
+  --color-light-main-200: rgb(226 226 232);
+  --color-light-main-300: rgb(210 210 220);
+  --color-light-main-400: rgb(190 190 202);
+  --color-light-main-500: rgb(168 168 180);
+  --color-light-main-600: rgb(140 140 152);
+  --color-light-main-700: rgb(112 112 124);
+  --color-light-main-800: rgb(82 82 94);
+  --color-light-main-900: rgb(52 52 64);
 
-    --transparent:#00000000;
-}
-body {
-    color: var(--color-text);
-    background-color: var(--color-bg);
-}
+  --color-light-accent-400: rgb(139 87 255);
+  --color-light-accent-500: rgb(108 41 255);
+  --color-light-accent-600: rgb(85 31 204);
+  --color-light-accent-700: rgb(64 23 153);
 
-h2, h3, h4, h5, h6 {
-    color: var(--color-primary);
-}
-h1 > a{
-    color: var(--color-primary);
-	text-decoration: none;
-}
-pre, code {
-    background-color: var(--color-code-bg);
-    color: var(--color-code-text);
-}
-.navBar > .nav-link{
-    color: var(--color-text-secondary);
-	background-color: #00000000;
-}
-.navBar > button{
-    background-color: var(--transparent);
-}
-.navBar > .nav-link:hover{
-    color:var(--color-accent);
-}
-.button{
-    background-color: var(--color-accent);
-    color: var(--color-surface);
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-.button:hover,.button:focus {
-    background-color: var(--color-primary);
-    transform: translateY(-1px);
-}
-.button.active {
-    transform: translateY(1rem);
-    background-color: var(--color-surface);
-    color:var(--color-accent);
-}
-.navBar{
-	background-color: var(--color-bg) ;
-}
-section#contact .button{
-    color: var(--color-accent);
-	background-color: var(--color-surface);
-}
-.project-card{
-    background-color: var(--color-bg);
-}
-.button img{
-    color: var(--color-surface);
-}
-section#about{
-    background-color: var(--color-bg);
+  --color-light-bg: rgb(255 255 255);
+  --color-light-surface: rgb(248 248 252);
+
+  --color-dark-main-50: rgb(246 243 255);
+  --color-dark-main-100: rgb(223 216 255);
+  --color-dark-main-200: rgb(196 176 255);
+  --color-dark-main-300: rgb(164 130 255);
+  --color-dark-main-400: rgb(132 85 255);
+  --color-dark-main-500: rgb(102 42 255);
+  --color-dark-main-600: rgb(80 32 204);
+  --color-dark-main-700: rgb(58 23 153);
+  --color-dark-main-800: rgb(37 14 102);
+  --color-dark-main-900: rgb(18 7 51);
+
+  --color-dark-accent-400: rgb(255 201 63);
+  --color-dark-accent-500: rgb(255 186 0);
+  --color-dark-accent-600: rgb(204 150 0);
+  --color-dark-accent-700: rgb(153 112 0);
+
+  --color-dark-bg: rgb(12 10 26);
+  --color-dark-surface: rgb(20 18 38);
 }

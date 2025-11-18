@@ -1,5 +1,5 @@
 ---
-
+import "../styles/global.css";
 import background from '../assets/background.svg';
 ---
 
@@ -15,7 +15,7 @@ import background from '../assets/background.svg';
 	</head>
 	<body>
 		<slot name="navigation"/>
-		<img id="background" src={background.src} alt="" fetchpriority="high" />
+		<img id="background" class="" src={background.src} alt="" fetchpriority="high" />
 		<main>
 			<slot id="start" name="start"/>
 			<slot id="portfolio" name="projects"/>
