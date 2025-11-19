@@ -67,7 +67,7 @@ export default function NavBar() {
         dark:bg-dark-main-900 dark:text-dark-main-400
         shadow backdrop-blur-md
       ">
-      <h1 className="text-xl font-semibold text-light-accent-500 dark:text-dark-accent-500"><a href="#start">Y4vra</a></h1>
+      <h1 className="h-full font-semibold text-light-accent-500 dark:text-dark-accent-500"><a href="#start">Y4vra</a></h1>
       
       {/*Desktop*/}
       <div className="flex items-center gap-6 h-full">
