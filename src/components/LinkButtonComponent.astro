@@ -1,0 +1,18 @@
+---
+const { href, label } = Astro.props;
+---
+<a class="flex items-center gap-3 px-5 py-3 rounded-lg
+      bg-light-main-100 dark:bg-dark-main-700 
+      text-light-main-800 dark:text-dark-main-50
+
+      hover:bg-light-accent-500 dark:hover:bg-dark-accent-400 
+      hover:text-light-main-50 dark:hover:text-dark-accent-700
+
+      transition-all shadow-sm
+      hover:shadow-md hover:-translate-y-0.5
+      focus-visible:outline-none
+      focus-visible:ring-2 focus-visible:ring-light-accent-500
+      dark:focus-visible:ring-dark-accent-500" href={href} target="_blank" rel="noopener noreferrer">
+		<slot name="image"/>
+		<span>{label}</span>
+	</a>

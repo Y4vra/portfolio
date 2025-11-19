@@ -2,4 +2,4 @@
 @import "./palette.css";
 @import "./typography.css";
 
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+@custom-variant dark (&:where(.dark, .dark *));

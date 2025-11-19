@@ -1,35 +1,41 @@
 ---
-import githubImage from '../assets/github-logo.svg';
-import linkedinImage from '../assets/linkedin-logo.svg';
-import leetcodeImage from '../assets/leetcode-logo.svg';
-import signalImage from '../assets/signal-logo.svg';
+import GithubLogo from '../assets/github-logo.astro';
+import LinkedinLogo from '../assets/linkedin-logo.astro';
+import LeetcodeLogo from '../assets/leetcode-logo.astro';
+import SignalLogo from '../assets/signal-logo.astro';
+import LinkButtonComponent from './LinkButtonComponent.astro';
 
 const githubUrl = "https://github.com/Y4vra";
 const linkedinUrl = "https://www.linkedin.com/in/javiercarrascoarango";
 const leetcodeUrl = "https://www.leetcode.com/slavencer";
 const signalUrl = "https://signal.me/#eu/-gnbaFEXeBNhNFGqMfudDoDDlm3wNsL8Lp9-wxskdujg7n359tNPd4hCf2Tyb5wC";
 ---
-<section id="contact" class="container centered">
+<section id="contact" class="scroll-mt-20 w-full h-screen px-[40%] py-[10%] flex flex-col gap-4">
 	<!-- GitHub -->
-	<a class="button" href={githubUrl} target="_blank" rel="noopener noreferrer">
-		<img alt="github logo" src={githubImage.src} aria-hidden="true" loading="lazy"/>
-		<span>GitHub</span>
-	</a>
-
+      <LinkButtonComponent
+      href={githubUrl} 
+      label={"Github"} 
+      >
+      <GithubLogo class="w-8 h-8" slot="image"/> 
+      </LinkButtonComponent>
 	<!-- LinkedIn -->
-	<a class="button" href={linkedinUrl} target="_blank" rel="noopener noreferrer">
-		<img alt="LinkedIn logo" src={linkedinImage.src} aria-hidden="true" loading="lazy"/>
-		<span>LinkedIn</span>
-	</a>
-
+	<LinkButtonComponent 
+      href={linkedinUrl} 
+      label={"LinkedIn"}>
+      <LinkedinLogo class="w-8 h-8" slot="image"/> 
+      </LinkButtonComponent>
 	<!-- LeetCode -->
-	<a class="button" href={leetcodeUrl} target="_blank" rel="noopener noreferrer">
-		<img alt="Leetcode logo" src={leetcodeImage.src} aria-hidden="true" loading="lazy"/>
-		<span>LeetCode</span>
-	</a>
+	<LinkButtonComponent 
+      href={leetcodeUrl} 
+      label={"Leetcode"} 
+      >
+      <LeetcodeLogo class="w-8 h-8" slot="image"/>
+      </LinkButtonComponent>
 	<!-- Signal -->
-	<a class="button" href={signalUrl} target="_blank" rel="noopener noreferrer">
-		<img alt="Signal logo" src={signalImage.src} aria-hidden="true" loading="lazy"/>
-		<span>Signal</span>
-	</a>
+	<LinkButtonComponent 
+      href={signalUrl} 
+      label={"Signal"} 
+      >
+      <SignalLogo class="w-8 h-8" slot="image"/>
+      </LinkButtonComponent>
 </section>

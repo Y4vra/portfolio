@@ -12,8 +12,11 @@ import background from '../assets/background.svg';
 		<link rel="preconnect" href="https://rsms.me/">
 		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 		<title>Y4vra's portfolio</title>
+		<script>if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.toggle("dark");</script>
 	</head>
-	<body>
+	<body class="
+		bg-light-bg dark:bg-dark-bg
+		text-light-main-900 dark:text-dark-main-50">
 		<slot name="navigation"/>
 		<img id="background" class="" src={background.src} alt="" fetchpriority="high" />
 		<main>
