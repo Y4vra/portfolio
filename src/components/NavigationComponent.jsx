@@ -56,34 +56,42 @@ export default function NavBar() {
 
   const toggleTheme = ()=>{
     document.documentElement.toggleAttribute("data-theme", "dark");
-    btn = document.getElementById("sidebarToggle");
-    isDark = document.documentElement.getAttribute("data-theme") === "dark";
-    btn.dataset.on = isDark;
-    btn.setAttribute("aria-pressed", String(isDark));
   }
 
   return (
     <nav className="
+        sticky
         flex items-center justify-between
-        px-4 py-3
-        bg-bgLight
-        dark:bg-bgDark
-        text-main-900
-        border-b border-main-200/20
+        px-4 py-4
+        w-full
+        h-16
+        bg-light-main-50
+        text-light-main-900
+        dark:bg-dark-main-900
+        dark:text-dark-main-50
       ">
-      <h1 className="text-xl font-semibold text-accent-500"><a href="#start">Y4vra</a></h1>
+      <h1 className="text-xl font-semibold text-light-accent-500 dark:text-dark-accent-500"><a href="#start">Y4vra</a></h1>
       
       {/*Desktop*/}
-      <div className="flex items-center gap-6">
-        <a onClick={linkClickSidebarCheck} className={`px-2 py-1 rounded-md text-accent-400 transition-colors ${activeHash === "#portfolio" ? "text-accent-500 font-medium" : "text-main-700 hover:text-accent-500"}`} href="#portfolio">Projects</a>
-        <a onClick={linkClickSidebarCheck} className={`px-2 py-1 transition-colors ${activeHash === "#about" ? "text-accent-500 font-medium" : "text-main-700 hover:text-accent-500"}`} href="#about">About</a>
-        <a onClick={linkClickSidebarCheck} className={`px-2 py-1 transition-colors ${activeHash === "#contact" ? "text-accent-500 font-medium" : "text-main-700 hover:text-accent-500"}`} href="#contact">Contact</a>
-        <label className="inline-flex items-center cursor-pointer">
-          <svg className="w-5 h-5 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.5 8.43A4.985 4.985 0 0 1 19 12a4.984 4.984 0 0 1-1.43 3.5M14 6.135v11.73a1 1 0 0 1-1.64.768L8 15H6a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l4.36-3.633a1 1 0 0 1 1.64.768Z"/></svg>
-          <input type="checkbox" value="" className="sr-only peer"/>
-          <div className="relative mx-3 w-9 h-5 bg-neutral-quaternary peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-brand-soft dark:peer-focus:ring-brand-soft rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-buffer after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-brand"></div>
-          <svg className="w-5 h-5 text-body" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.5 8.43A4.985 4.985 0 0 1 17 12a4.984 4.984 0 0 1-1.43 3.5m2.794 2.864A8.972 8.972 0 0 0 21 12a8.972 8.972 0 0 0-2.636-6.364M12 6.135v11.73a1 1 0 0 1-1.64.768L6 15H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h2l4.36-3.633a1 1 0 0 1 1.64.768Z"/></svg>
-        </label>
+      <div className="flex items-center gap-6 w-1/4 h-full">
+        <a onClick={linkClickSidebarCheck} className={`px-2 py-1 rounded-md text-light-main-400 dark:text-dark-main-400 transition-colors ${activeHash === "#portfolio" ? "text-accent-500 font-medium" : "text-main-700 hover:text-accent-500"}`} href="#portfolio">Projects</a>
+        <a onClick={linkClickSidebarCheck} className={`px-2 py-1 rounded-md text-light-main-400 dark:text-dark-main-400 transition-colors ${activeHash === "#about" ? "text-accent-500 font-medium" : "text-main-700 hover:text-accent-500"}`} href="#about">About</a>
+        <a onClick={linkClickSidebarCheck} className={`px-2 py-1 rounded-md text-light-main-400 dark:text-dark-main-400 transition-colors ${activeHash === "#contact" ? "text-accent-500 font-medium" : "text-main-700 hover:text-accent-500"}`} href="#contact">Contact</a>
+        <div className="flex items-center gap-3 h-full w-1/4">
+          <svg className="h-full w-1/4 text-light-main-500 dark:text-dark-main-500" fill="currentcolor" viewBox="0 0 30 30"><path d="M 14.984375 0.98632812 A 1.0001 1.0001 0 0 0 14 2 L 14 5 A 1.0001 1.0001 0 1 0 16 5 L 16 2 A 1.0001 1.0001 0 0 0 14.984375 0.98632812 z M 5.796875 4.7988281 A 1.0001 1.0001 0 0 0 5.1015625 6.515625 L 7.2226562 8.6367188 A 1.0001 1.0001 0 1 0 8.6367188 7.2226562 L 6.515625 5.1015625 A 1.0001 1.0001 0 0 0 5.796875 4.7988281 z M 24.171875 4.7988281 A 1.0001 1.0001 0 0 0 23.484375 5.1015625 L 21.363281 7.2226562 A 1.0001 1.0001 0 1 0 22.777344 8.6367188 L 24.898438 6.515625 A 1.0001 1.0001 0 0 0 24.171875 4.7988281 z M 15 8 A 7 7 0 0 0 8 15 A 7 7 0 0 0 15 22 A 7 7 0 0 0 22 15 A 7 7 0 0 0 15 8 z M 2 14 A 1.0001 1.0001 0 1 0 2 16 L 5 16 A 1.0001 1.0001 0 1 0 5 14 L 2 14 z M 25 14 A 1.0001 1.0001 0 1 0 25 16 L 28 16 A 1.0001 1.0001 0 1 0 28 14 L 25 14 z M 7.9101562 21.060547 A 1.0001 1.0001 0 0 0 7.2226562 21.363281 L 5.1015625 23.484375 A 1.0001 1.0001 0 1 0 6.515625 24.898438 L 8.6367188 22.777344 A 1.0001 1.0001 0 0 0 7.9101562 21.060547 z M 22.060547 21.060547 A 1.0001 1.0001 0 0 0 21.363281 22.777344 L 23.484375 24.898438 A 1.0001 1.0001 0 1 0 24.898438 23.484375 L 22.777344 21.363281 A 1.0001 1.0001 0 0 0 22.060547 21.060547 z M 14.984375 23.986328 A 1.0001 1.0001 0 0 0 14 25 L 14 28 A 1.0001 1.0001 0 1 0 16 28 L 16 25 A 1.0001 1.0001 0 0 0 14.984375 23.986328 z"/></svg>
+          <input id="themeToggle" type="checkbox" onChange={toggleTheme} className="sr-only peer"/>
+          <label className="
+              relative h-1/2 w-1/2 cursor-pointer
+              rounded-full bg-gray-400 px-[3%] transition-colors
+
+              before:content-[''] before:absolute before:left-0 before:top-0
+              before:h-full before:w-1/2 before:rounded-full before:bg-white
+              before:transition-transform
+
+              peer-checked:before:translate-x-full
+            " htmlFor="themeToggle"><span className="sr-only">Enabled</span></label>
+          <svg className="h-full w-1/4 text-light-accent-500 dark:text-dark-accent-500" fill="currentcolor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/></svg>
+        </div>
       </div>
       {/*Mobile*/}
       <button
