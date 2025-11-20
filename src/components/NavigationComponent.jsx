@@ -64,6 +64,7 @@ export default function NavBar() {
   };
 
   return (
+    <>
     <nav className="
         sticky
         top-0
@@ -73,12 +74,12 @@ export default function NavBar() {
         h-16 w-full
         bg-light-surface text-light-main-900
         dark:bg-dark-main-900 dark:text-dark-main-400
-        shadow backdrop-blur-md
-      ">
+        shadow-xl backdrop-blur-md
+        ">
       <h1 className="h-full font-semibold text-light-accent-500 dark:text-dark-accent-500"><a href="#start">Y4vra</a></h1>
       
       {/*Desktop*/}
-      <div className="flex items-center gap-6 h-full">
+      <div className="collapse md:visible flex items-center gap-6 h-full">
         <a onClick={linkClickSidebarCheck} className={`px-2 py-1 rounded-md transition-colors ${activeHash === "#portfolio" 
           ? "bg-light-main-300 dark:bg-dark-main-800 text-light-accent-600 dark:text-dark-accent-400 font-medium" 
           : "hover:text-light-accent-500 dark:hover:text-dark-accent-500 hover:bg-light-main-100 dark:hover:bg-dark-main-800"
@@ -97,13 +98,13 @@ export default function NavBar() {
           <label className="
               relative h-2/3 w-2/3 cursor-pointer
               rounded-full bg-dark-accent-500 dark:bg-dark-main-500 px-[6%] transition-colors
-
+              
               before:content-[''] before:absolute before:left-[5%] before:top-[10%]
               before:h-[82%] before:w-1/2 before:rounded-full before:bg-white
               before:transition-transform 
-
+              
               peer-checked:before:translate-x-full peer-checked:before:left-[-5%]
-            " htmlFor="themeToggle"><span className="sr-only">Enabled</span></label>
+              " htmlFor="themeToggle"><span className="sr-only">Enabled</span></label>
           <svg className="h-full w-1/4 text-light-accent-500" fill="currentcolor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 1 0 9.79 9.79Z"/></svg>
         </div>
       </div>
@@ -111,14 +112,42 @@ export default function NavBar() {
       <button
         id="sidebarToggle"
         onClick={toggleSidebar}
-        className="hidden text-main-900 dark:text-main-50"
-      >
+        className="block md:hidden text-main-900 dark:text-main-50"
+        >
         <svg className="w-6 h-6" stroke="currentColor" fill="none">
           <path strokeLinecap="round" strokeLinejoin="round"
             d="M4 6h16M4 12h16M4 18h16"
-          />
+            />
         </svg>
       </button>
     </nav>
+    <div
+    className={`
+        flex flex-col gap-4 px-4 py-3
+        md:hidden
+        fixed top-16 left-0 w-full
+        z-30
+        items-center justify-between
+        px-4 py-4
+        bg-light-surface text-light-main-900
+        dark:bg-dark-main-900 dark:text-dark-main-400
+        shadow-sm backdrop-blur-md
+        ${sidebarOpen ? "block" : "hidden"}
+      `}
+    >
+      <a href="#portfolio" className={`px-2 py-1 rounded-md transition-colors ${activeHash === "#portfolio" 
+          ? "bg-light-main-300 dark:bg-dark-main-800 text-light-accent-600 dark:text-dark-accent-400 font-medium" 
+          : "hover:text-light-accent-500 dark:hover:text-dark-accent-500 hover:bg-light-main-100 dark:hover:bg-dark-main-800"
+          }`} onClick={linkClickSidebarCheck}>Projects</a>
+      <a href="#about" className={`px-2 py-1 rounded-md transition-colors ${activeHash === "#about" 
+          ? "bg-light-main-300 dark:bg-dark-main-800 text-light-accent-600 dark:text-dark-accent-400 font-medium" 
+          : "hover:text-light-accent-500 dark:hover:text-dark-accent-500 hover:bg-light-main-100 dark:hover:bg-dark-main-800"
+          }`} onClick={linkClickSidebarCheck}>About</a>
+      <a href="#contact" className={`px-2 py-1 rounded-md transition-colors ${activeHash === "#contact" 
+          ? "bg-light-main-300 dark:bg-dark-main-800 text-light-accent-600 dark:text-dark-accent-400 font-medium" 
+          : "hover:text-light-accent-500 dark:hover:text-dark-accent-500 hover:bg-light-main-100 dark:hover:bg-dark-main-800"
+          }`} onClick={linkClickSidebarCheck}>Contact</a>
+    </div>
+  </>
   );
 }
