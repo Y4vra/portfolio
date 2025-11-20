@@ -6,6 +6,14 @@ export default function NavBar() {
 
   useEffect(() => {
     setSidebarOpen(window.innerWidth>=768);
+
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    const toggle = document.getElementById("themeToggle");
+    if (toggle.checked!=isDarkMode) {
+      document.documentElement.classList.add("dark");
+      if (toggle) toggle.checked = true;  // set switch position
+    }
+
     setActiveHash(window.location.hash || '#start');
     const onHashChange = () => {
       setActiveHash(window.location.hash || '#start');
@@ -51,9 +59,9 @@ export default function NavBar() {
     }
   }
 
-  const toggleTheme = ()=>{
+  const toggleTheme = () => {
     document.documentElement.classList.toggle("dark");
-  }
+  };
 
   return (
     <nav className="

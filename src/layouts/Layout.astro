@@ -18,8 +18,8 @@ import background from '../assets/background.svg';
 		bg-light-bg dark:bg-dark-bg
 		text-light-main-900 dark:text-dark-main-50">
 		<slot name="navigation"/>
-		<img id="background" class="" src={background.src} alt="" fetchpriority="high" />
-		<main>
+		<img id="background" class="fixed z-0 inset-0 w-full h-full object-cover filter blur-sm" src={background.src} alt="" fetchpriority="high" />
+		<main class="relative z-10">
 			<slot id="start" name="start"/>
 			<slot id="portfolio" name="projects"/>
 			<slot id="about" name="about"/>
