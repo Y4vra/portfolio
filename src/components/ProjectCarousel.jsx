@@ -11,11 +11,7 @@ const ProjectCarousel = ({ projects }) => {
     // Update cards per view based on screen size
     useEffect(() => {
         const updateCardsPerView = () => {
-            if (window.innerWidth < 768) {
-                setCardsPerView(1);
-            } else {
-                setCardsPerView(3);
-            }
+            setCardsPerView(window.innerWidth < 768? 1:3)
         };
 
         updateCardsPerView();

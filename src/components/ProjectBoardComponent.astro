@@ -20,7 +20,7 @@ const projectsData = projects.map((project: CollectionEntry<"projects">) => ({
 <section id="portfolio" class="scroll-mt-20 z-10 min-h-screen w-full flex flex-col items-center justify-center gap-8 py-12 px-4 bg-light-surface dark:bg-dark-surface">
     <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">My Projects</h1>
     {hasProjects ? (
-        <ProjectCarousel client:load projects={projectsData} />
+        <ProjectCarousel client:only projects={projectsData} />
     ) : (
         <p class="text-lg text-gray-600 dark:text-gray-400">No projects found. Check back later!</p>
     )}
