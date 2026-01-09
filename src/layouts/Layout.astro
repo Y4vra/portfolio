@@ -1,6 +1,5 @@
 ---
 import "../styles/global.css";
-import DotGrid from "../components/background";
 ---
 
 <!doctype html>
@@ -20,7 +19,7 @@ import DotGrid from "../components/background";
 		<slot name="navigation"/>
 		<div 
 		id="background" 
-		class="bg-dots-pattern fixed inset-0 z-0 h-full w-full bg-repeat bg-center filter" 
+		class="bg-dots-pattern fixed inset-0 z-0 -bottom-[20%] h-[120vh] w-full bg-repeat bg-center filter will-change-transform" 
 		></div>
 		<style is:global>
 		/* LIGHT MODE (Purple) */
@@ -37,6 +36,19 @@ import DotGrid from "../components/background";
 			<slot id="about" name="about"/>
 			<slot id="contact" name="contact"/>
 		</main>
+		<script>
+			const background = document.getElementById('background');
+			let scrollY = 0;
+
+			function moveBackground() {
+				scrollY = window.scrollY;
+				const scrollPercent = scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+				const moveAmount = scrollPercent * 100; // Moves it exactly 100px over the whole page
+				background.style.transform = `translate3d(0, ${-moveAmount}px, 0)`;
+				requestAnimationFrame(moveBackground);
+			}
+			requestAnimationFrame(moveBackground);
+		</script>
 	</body>
 </html>
 

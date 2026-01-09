@@ -3,3 +3,8 @@
 @import "./typography.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+#background {
+    will-change: background-position;
+    transition: background-position 0.1s ease-out;
+}
