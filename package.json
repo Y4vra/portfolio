@@ -15,6 +15,7 @@
     "@types/react-dom": "^19.1.9",
     "astro": "^5.12.9",
     "autoprefixer": "^10.4.22",
+    "motion": "^12.25.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "tailwindcss": "^4.1.17"

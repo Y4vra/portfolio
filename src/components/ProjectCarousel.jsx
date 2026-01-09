@@ -129,7 +129,7 @@ const ProjectCarousel = ({ projects }) => {
                             className="flex-shrink-0 px-2 md:px-4"
                             style={{ width: `${100 / cardsPerView}%` }}
                         >
-                            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden h-full flex flex-col">
+                            <div className="bg-light-main-200 dark:bg-dark-main-900 rounded-lg shadow-lg overflow-hidden h-full flex flex-col">
                                 <div className="aspect-video w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
                                     <img
                                         src={project.image}
