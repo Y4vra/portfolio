@@ -138,16 +138,26 @@ const ProjectCarousel = ({ projects }) => {
                                     />
                                 </div>
                                 <div className="p-6 flex flex-col flex-grow">
-                                    <h2 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+                                    <h2>
                                         {project.title}
                                     </h2>
-                                    <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">
+                                    <p className="mb-4 flex-grow">
                                         {project.description}
                                     </p>
                                     <a
                                         href={project.link}
-                                        className="inline-block bg-light-main-100 dark:bg-dark-main-700 text-light-main-800 dark:text-dark-main-50 hover:bg-light-accent-500 dark:hover:bg-dark-accent-400 
-      hover:text-light-main-50 dark:hover:text-dark-accent-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 text-center"
+                                        className="inline-block py-2 px-6 rounded-lg transition-colors text-center
+                                        bg-light-main-100 dark:bg-dark-main-700 
+                                        text-light-main-800 dark:text-dark-main-50
+
+                                        hover:bg-light-accent-500 dark:hover:bg-dark-accent-400 
+                                        hover:text-light-main-50 dark:hover:text-dark-accent-700
+
+                                        transition-all shadow-sm
+                                        hover:shadow-md hover:translate-y-0.5
+                                        focus-visible:outline-none
+                                        focus-visible:ring-2 focus-visible:ring-light-accent-500
+                                        dark:focus-visible:ring-dark-accent-500"
                                     >
                                         More...
                                     </a>
