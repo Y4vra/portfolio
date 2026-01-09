@@ -1,0 +1,21 @@
+---
+// SectionWrapper.astro
+const { id, class: className, ...rest } = Astro.props;
+---
+
+<section 
+  id={id} 
+  class:list={["relative overflow-hidden", className]} 
+  {...rest}
+>
+  <div 
+    class="absolute inset-0 pointer-events-none -z-10 
+           bg-light-bg dark:bg-dark-bg backdrop-blur-[2px] 
+           [mask-image:radial-gradient(ellipse_120%_70%_at_center_50%,black_30%,transparent_70%)]
+           [-webkit-mask-image:radial-gradient(ellipse_120%_70%_at_center_50%,black_30%,transparent_70%)]"
+  ></div>
+
+  <div class="relative z-10">
+    <slot />
+  </div>
+</section>

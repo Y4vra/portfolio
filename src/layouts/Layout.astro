@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import DotGrid from "../components/background";
 ---
 
 <!doctype html>
@@ -19,11 +20,7 @@ import "../styles/global.css";
 		<slot name="navigation"/>
 		<div 
 		id="background" 
-		class="bg-dots-pattern fixed inset-0 z-0 h-full w-full bg-repeat bg-center filter blur-[1px]" 
-		style="
-			mask-image: radial-gradient(ellipse 125% 80% at center 60%, transparent 20%, black 70%);
-			-webkit-mask-image: radial-gradient(ellipse 125% 80% at center 60%, transparent 20%, black 70%);
-		"
+		class="bg-dots-pattern fixed inset-0 z-0 h-full w-full bg-repeat bg-center filter" 
 		></div>
 		<style is:global>
 		/* LIGHT MODE (Purple) */
