@@ -4,16 +4,13 @@ const ProjectCarousel = ({ projects }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
-    const [scrollLeft, setScrollLeft] = useState(0);
     const carouselRef = useRef(null);
     const [cardsPerView, setCardsPerView] = useState(3);
 
-    // Update cards per view based on screen size
     useEffect(() => {
         const updateCardsPerView = () => {
-            setCardsPerView(window.innerWidth < 768? 1:3)
+            setCardsPerView(window.innerWidth < 768 ? 1 : 3)
         };
-
         updateCardsPerView();
         window.addEventListener('resize', updateCardsPerView);
         return () => window.removeEventListener('resize', updateCardsPerView);
@@ -29,11 +26,9 @@ const ProjectCarousel = ({ projects }) => {
         setCurrentIndex((prev) => Math.max(prev - 1, 0));
     };
 
-    // Mouse drag handlers
     const handleMouseDown = (e) => {
         setIsDragging(true);
         setStartX(e.pageX - (carouselRef.current?.offsetLeft || 0));
-        setScrollLeft(currentIndex);
     };
 
     const handleMouseMove = (e) => {
@@ -43,50 +38,34 @@ const ProjectCarousel = ({ projects }) => {
         const walk = (startX - x) / 100;
         
         if (Math.abs(walk) > 0.5) {
-            if (walk > 0) {
-                goToNext();
-            } else {
-                goToPrev();
-            }
+            if (walk > 0) goToNext();
+            else goToPrev();
             setIsDragging(false);
         }
     };
 
-    const handleMouseUp = () => {
-        setIsDragging(false);
-    };
+    const handleMouseUp = () => setIsDragging(false);
 
-    // Touch handlers
-    const handleTouchStart = (e) => {
-        setStartX(e.touches[0].clientX);
-    };
+    const handleTouchStart = (e) => setStartX(e.touches[0].clientX);
 
     const handleTouchMove = (e) => {
         if (!startX) return;
         const currentX = e.touches[0].clientX;
         const diff = startX - currentX;
-
         if (Math.abs(diff) > 50) {
-            if (diff > 0) {
-                goToNext();
-            } else {
-                goToPrev();
-            }
+            if (diff > 0) goToNext();
+            else goToPrev();
             setStartX(0);
         }
     };
 
-    const handleTouchEnd = () => {
-        setStartX(0);
-    };
-
     return (
         <div className="w-full max-w-7xl mx-auto relative px-4">
-            {/* Navigation Buttons */}
+            {/* Botones de navegación */}
             <button
                 onClick={goToPrev}
                 disabled={currentIndex === 0}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 transition-all"
                 aria-label="Previous"
             >
                 <svg className="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,7 +76,7 @@ const ProjectCarousel = ({ projects }) => {
             <button
                 onClick={goToNext}
                 disabled={currentIndex >= maxIndex}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white dark:bg-gray-800 rounded-full p-3 shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 transition-all"
                 aria-label="Next"
             >
                 <svg className="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -105,17 +84,18 @@ const ProjectCarousel = ({ projects }) => {
                 </svg>
             </button>
 
-            {/* Carousel Container */}
+            {/* Contenedor del Carrusel */}
             <div
                 ref={carouselRef}
-                className="overflow-hidden cursor-grab active:cursor-grabbing mx-12"
+                /* py-4 es clave para que la sombra no se corte arriba/abajo */
+                className="overflow-hidden cursor-grab active:cursor-grabbing mx-12 py-6"
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
-                onTouchEnd={handleTouchEnd}
+                onTouchEnd={() => setStartX(0)}
             >
                 <div
                     className="flex transition-transform duration-300 ease-out"
@@ -126,38 +106,26 @@ const ProjectCarousel = ({ projects }) => {
                     {projects.map((project) => (
                         <article
                             key={project.id}
-                            className="flex-shrink-0 px-2 md:px-4"
+                            className="flex-shrink-0 px-3 md:px-5"
                             style={{ width: `${100 / cardsPerView}%` }}
                         >
-                            <div className="bg-light-main-200 dark:bg-dark-main-900 rounded-lg shadow-lg overflow-hidden h-full flex flex-col">
+                            {/* He mejorado el shadow a shadow-xl para que sea más notable */}
+                            <div className="bg-light-main-200 dark:bg-dark-main-900 rounded-xl shadow-xl dark:shadow-black/50 overflow-hidden h-full flex flex-col transform transition-transform hover:-translate-y-1">
                                 <div className="aspect-video w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
                                     <img
                                         src={project.image}
                                         alt={project.title}
-                                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                                        className="w-full h-full object-cover"
                                     />
                                 </div>
                                 <div className="p-6 flex flex-col flex-grow">
-                                    <h2>
-                                        {project.title}
-                                    </h2>
-                                    <p className="mb-4 flex-grow">
+                                    <h2 className="text-xl font-bold mb-2">{project.title}</h2>
+                                    <p className="mb-4 flex-grow text-sm opacity-90">
                                         {project.description}
                                     </p>
                                     <a
                                         href={project.link}
-                                        className="inline-block py-2 px-6 rounded-lg transition-colors text-center
-                                        bg-light-main-100 dark:bg-dark-main-700 
-                                        text-light-main-800 dark:text-dark-main-50
-
-                                        hover:bg-light-accent-500 dark:hover:bg-dark-accent-400 
-                                        hover:text-light-main-50 dark:hover:text-dark-accent-700
-
-                                        transition-all shadow-sm
-                                        hover:shadow-md hover:translate-y-0.5
-                                        focus-visible:outline-none
-                                        focus-visible:ring-2 focus-visible:ring-light-accent-500
-                                        dark:focus-visible:ring-dark-accent-500"
+                                        className="inline-block py-2 px-6 rounded-lg text-center bg-light-main-100 dark:bg-dark-main-700 text-light-main-800 dark:text-dark-main-50 hover:bg-light-accent-500 dark:hover:bg-dark-accent-400 hover:text-white transition-all shadow-sm"
                                     >
                                         More...
                                     </a>
@@ -168,18 +136,17 @@ const ProjectCarousel = ({ projects }) => {
                 </div>
             </div>
 
-            {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
+            {/* Indicadores */}
+            <div className="flex justify-center gap-2 mt-2">
                 {Array.from({ length: maxIndex + 1 }).map((_, index) => (
                     <button
                         key={index}
                         onClick={() => setCurrentIndex(index)}
-                        className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                        className={`w-2 h-2 rounded-full transition-all ${
                             index === currentIndex
-                                ? 'bg-light-accent-500 dark:bg-dark-accent-400'
-                                : 'bg-light-main-100 dark:bg-dark-main-700 hover:bg-light-accent-500 dark:hover:bg-dark-accent-400'
+                                ? 'bg-light-accent-500 w-4'
+                                : 'bg-gray-300 dark:bg-gray-600'
                         }`}
-                        aria-label={`Go to slide ${index + 1}`}
                     />
                 ))}
             </div>
