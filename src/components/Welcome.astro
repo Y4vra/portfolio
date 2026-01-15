@@ -1,8 +1,23 @@
 ---
+import RotatingText from "./RotatingText"
+import SectionWrapper from "./SectionWrapper.astro"
 ---
 
-<section id="start" class="scroll-mt-20 h-screen px-[20%] w-full flex flex-col place-content-center">
-	<h1 class="">Hi, I'm Javier Carrasco Arango</h1>
-	<p>Aspiring software engineer passionate in full stack development, cybersecurity, and team leadership. I'm dedicated to lifelong learning.</p>
+<SectionWrapper id="start" class="relative scroll-mt-20 h-screen px-[20%] w-full flex flex-col place-content-center overflow-hidden">
+  <div class="relative z-10">
+    <h1>Hi, I'm Javier Carrasco Arango</h1>
+    <p class="text-lg md:text-xl leading-relaxed">Aspiring software engineer passionate in <RotatingText client:load
+      texts={['full-stack dev', 'cybersecurity','team leadership', 'lifelong learning']}
+      mainClassName="inline-flex px-2 sm:px-2 md:px-3 bg-light-accent-500 dark:bg-dark-accent-400 text-light-main-50 dark:text-dark-accent-700 overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+      staggerFrom={"last"}
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      exit={{ y: "-120%" }}
+      staggerDuration={0.025}
+      splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+      transition={{ type: "spring", damping: 30, stiffness: 400 }}
+      rotationInterval={3000}
+    /></p>
+    </div>
 </section>
 
