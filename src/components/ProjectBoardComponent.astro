@@ -1,8 +1,8 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from "astro:content";
 import ProjectCarousel from './ProjectCarousel';
+import ProjectList from './ProjectList.astro';
 
 const projects = await getCollection('projects');
 const hasProjects = projects.length > 0;
@@ -13,14 +13,20 @@ const projectsData = projects.map((project: CollectionEntry<"projects">) => ({
     image: import.meta.env.BASE_URL+project.data.image,
     title: project.data.title,
     description: project.data.description,
-    link: project.data.link
+    link: project.data.link,
+    display: project.data.display,
+    date: project.data.date
 }));
+const displayData = projectsData.flatMap(project => project.display?[project]:[])
 ---
 
 <section id="portfolio" class="scroll-mt-20 z-10 min-h-screen w-full flex flex-col items-center justify-center gap-8 py-12 px-4 bg-light-surface dark:bg-dark-surface">
-    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">My Projects</h1>
+    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">My Projects</h2>
     {hasProjects ? (
-        <ProjectCarousel client:only projects={projectsData} />
+        <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Featured</h3>
+        <ProjectCarousel client:only projects={displayData} />
+        <h3 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">Archive</h3>
+        <ProjectList projects={projectsData}/>
     ) : (
         <p class="text-lg text-gray-600 dark:text-gray-400">No projects found. Check back later!</p>
     )}

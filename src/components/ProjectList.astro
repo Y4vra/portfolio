@@ -1,0 +1,39 @@
+---
+const {projects} = Astro.props;
+const projectsProcessed = projects.sort((a, b) => b.date.getTime() - a.date.getTime()).reduce((acc, project) => {
+  const year = project.date.getFullYear().toString();
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(project);
+  return acc;
+}, {} as Record<string, typeof projects>);
+const years = Object.keys(projectsProcessed).sort((a, b) => b.localeCompare(a));
+---
+<div class="mx-auto pt-0 offseted col-sm-7 col-md-7 col-9 offset-2 relative">
+    <div class="absolute top-[13px] left-[-9px] z-[9] w-[1px] h-[100%] bg-[#5918df]"/>
+    <div class="space-y-12">
+    {years.map((year) => (
+        <section>
+        <p class="text-2xl font-bold mb-4 flex items-center relative">
+            <span class="relative w-2 h-8 mr-3
+                before:content-[''] before:absolute before:left-[-13px] before:top-[9px] 
+                before:w-[9px] before:h-[9px] before:bg-[#1b191e] before:z-[10]
+                before:border-2 before:border-[#5918df] before:rounded-full"/>
+            {year}
+        </p>
+        <ul class="space-y-4 ml-5">
+            {projectsProcessed[year].map((p) => (
+            <li class="relative pl-6">
+                <div class="absolute -left-[5px] top-2 w-2 h-2 rounded-full bg-gray-400"></div>
+                <a href={p.link} class="group">
+                <p class="font-semibold group-hover:text-light-accent-500 dark:group-hover:text-dark-accent-500 transition-colors">
+                    {p.title}
+                </p>
+                <p class="text-sm text-light-main-800 dark:text-dark-main-200">{p.description}</p>
+                </a>
+            </li>
+            ))}
+        </ul>
+        </section>
+    ))}
+    </div>
+</div>

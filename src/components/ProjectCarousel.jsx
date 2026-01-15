@@ -146,8 +146,8 @@ const ProjectCarousel = ({ projects }) => {
                                     </p>
                                     <a
                                         href={project.link}
-                                        className="inline-block bg-light-main-100 dark:bg-dark-main-700 text-light-main-800 dark:text-dark-main-50 hover:bg-light-accent-500 dark:hover:bg-dark-accent-400 
-      hover:text-light-main-50 dark:hover:text-dark-accent-700 text-white font-semibold py-2 px-6 rounded-lg transition-colors duration-200 text-center"
+                                        className="inline-block bg-light-main-100 dark:bg-dark-main-700  hover:bg-light-accent-500 dark:hover:bg-dark-accent-400 
+      hover:text-light-main-50 dark:hover:text-dark-accent-700 font-semibold py-2 px-6 rounded-lg transition-colors duration-200 text-center"
                                     >
                                         More...
                                     </a>

@@ -9,6 +9,8 @@ const projects = defineCollection({
         image: z.string().url().or(z.string()), // allow relative or full URL
         description: z.string().max(300),
         link: z.string().url(),
+        display: z.boolean(),
+        date: z.date()
     }),
 });
 
