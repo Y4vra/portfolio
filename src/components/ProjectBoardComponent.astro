@@ -17,7 +17,7 @@ const projectsData = projects.map((project: CollectionEntry<"projects">) => ({
     display: project.data.display,
     date: project.data.date
 }));
-const displayData = projectsData.flatMap(project => project.display?[project]:[])
+const displayData = projectsData.flatMap(project => project.display?[project]:[]).sort((a, b) => b.date.getTime() - a.date.getTime())
 ---
 
 <section id="portfolio" class="scroll-mt-20 z-10 min-h-screen w-full flex flex-col items-center justify-center gap-8 py-12 px-4 bg-light-surface dark:bg-dark-surface">
