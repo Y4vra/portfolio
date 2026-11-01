@@ -1,5 +1,5 @@
 :root{
-    --font-mono: 'Fira Code', 'Source Code Pro', monospace;
+    --font-mono: 'Fira Code Variable', 'Fira Code', ui-monospace, monospace;
 
     --fs-base: 1rem;
     --fs-small: 0.875rem;
@@ -7,11 +7,8 @@
     --fs-xl: 1.5rem;
     --fs-xxl: 2rem; 
 }
-@supports (font-variation-settings: normal) {
-  :root { font-family: InterVariable, sans-serif; }
-}
 body {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-family: 'Inter Variable', 'Inter', 'Segoe UI', sans-serif;
     font-feature-settings: 'liga' 1, 'calt' 1;
     font-size: 1rem;
     line-height: 1.6;

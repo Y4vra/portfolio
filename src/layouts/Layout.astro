@@ -1,25 +1,49 @@
 ---
+import "@fontsource-variable/inter";
+import "@fontsource-variable/fira-code";
 import "../styles/global.css";
+
+const title = "Javier Carrasco Arango · Portfolio";
+const description = "Portfolio of Javier Carrasco Arango (Y4vra), Software Engineering student focused on full-stack development, cybersecurity and team leadership.";
+const canonical = new URL(import.meta.env.BASE_URL, Astro.site);
+const ogImage = new URL(`${import.meta.env.BASE_URL}/projectImages/visual-oscillator.webp`.replace(/\/{2,}/g, "/"), Astro.site);
 ---
 
 <!doctype html>
-<html class="transition-colors duration-5000 ease-in-out overflow-y-scroll scroll-smooth" lang="en">
+<html class="transition-colors duration-500 ease-in-out overflow-y-scroll scroll-smooth" lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href={import.meta.env.BASE_URL+"/favicon.svg"} />
-		<link rel="preconnect" href="https://rsms.me/">
-		<link rel="stylesheet" href="https://rsms.me/inter/inter.css">
-		<title>Y4vra's portfolio</title>
-		<script>if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.toggle("dark");</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" type="image/svg+xml" href={import.meta.env.BASE_URL + "/favicon.svg"} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+
+		<meta name="color-scheme" content="light dark" />
+		<script is:inline>
+			(function () {
+				var stored = null;
+				try { stored = localStorage.getItem("theme"); } catch (e) {}
+				var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+				document.documentElement.classList.toggle("dark", dark);
+			})();
+		</script>
 	</head>
 	<body class="
 		bg-light-bg dark:bg-dark-bg
 		text-light-main-900 dark:text-dark-main-50">
 		<slot name="navigation"/>
-		<div 
-		id="background" 
-		class="bg-dots-pattern fixed inset-0 z-0 -bottom-[20%] h-[120vh] w-full bg-repeat bg-center filter will-change-transform" 
+		<div
+		id="background"
+		aria-hidden="true"
+		class="bg-dots-pattern fixed inset-0 z-0 -bottom-[20%] h-[120vh] w-full bg-repeat bg-center"
 		></div>
 		<style is:global>
 		/* LIGHT MODE (Purple) */
@@ -31,24 +55,35 @@ import "../styles/global.css";
 		}
 		</style>
 		<main class="relative z-10">
-			<slot id="start" name="start"/>
-			<slot id="portfolio" name="projects"/>
-			<slot id="about" name="about"/>
-			<slot id="contact" name="contact"/>
+			<slot name="start"/>
+			<slot name="projects"/>
+			<slot name="about"/>
+			<slot name="contact"/>
 		</main>
 		<script>
+			// Parallax: only recompute when the page actually scrolls or resizes.
 			const background = document.getElementById('background');
-			let scrollY = 0;
+			let ticking = false;
 
 			function moveBackground() {
-				scrollY = window.scrollY;
-				const scrollPercent = scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+				ticking = false;
+				if (!background) return;
+				const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+				const scrollPercent = maxScroll > 0 ? window.scrollY / maxScroll : 0;
 				const moveAmount = scrollPercent * 100; // Moves it exactly 100px over the whole page
 				background.style.transform = `translate3d(0, ${-moveAmount}px, 0)`;
-				requestAnimationFrame(moveBackground);
 			}
-			requestAnimationFrame(moveBackground);
+
+			function requestMove() {
+				if (!ticking) {
+					ticking = true;
+					requestAnimationFrame(moveBackground);
+				}
+			}
+
+			window.addEventListener('scroll', requestMove, { passive: true });
+			window.addEventListener('resize', requestMove);
+			requestMove();
 		</script>
 	</body>
 </html>
-

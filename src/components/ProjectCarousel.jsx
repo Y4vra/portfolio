@@ -60,26 +60,28 @@ const ProjectCarousel = ({ projects }) => {
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto relative px-4">
+        <div className="w-full max-w-7xl mx-auto relative px-4" role="region" aria-roledescription="carousel" aria-label="Featured projects">
             {/* Botones de navegación */}
             <button
+                type="button"
                 onClick={goToPrev}
                 disabled={currentIndex === 0}
                 className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 transition-all"
-                aria-label="Previous"
+                aria-label="Previous project"
             >
-                <svg className="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
 
             <button
+                type="button"
                 onClick={goToNext}
                 disabled={currentIndex >= maxIndex}
                 className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white dark:bg-gray-800 rounded-full p-3 shadow-md hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50 transition-all"
-                aria-label="Next"
+                aria-label="Next project"
             >
-                <svg className="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg aria-hidden="true" className="w-6 h-6 text-gray-800 dark:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
             </button>
@@ -114,17 +116,20 @@ const ProjectCarousel = ({ projects }) => {
                                 <div className="aspect-video w-full overflow-hidden bg-gray-200 dark:bg-gray-700">
                                     <img
                                         src={project.image}
-                                        alt={project.title}
+                                        alt=""
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-full h-full object-cover"
                                     />
                                 </div>
                                 <div className="p-6 flex flex-col flex-grow">
-                                    <h2 className="text-xl font-bold mb-2">{project.title}</h2>
+                                    <h4 className="text-xl font-bold mb-2">{project.title}</h4>
                                     <p className="mb-4 flex-grow text-sm opacity-90">
                                         {project.description}
                                     </p>
                                     <a
                                         href={project.link}
+                                        aria-label={`More about ${project.title}`}
                                         className="inline-block py-2 px-6 rounded-lg text-center bg-light-main-100 dark:bg-dark-main-700 text-light-main-800 dark:text-dark-main-50 hover:bg-light-accent-500 dark:hover:bg-dark-accent-400 hover:text-white transition-all shadow-sm"
                                     >
                                         More...
@@ -141,7 +146,10 @@ const ProjectCarousel = ({ projects }) => {
                 {Array.from({ length: maxIndex + 1 }).map((_, index) => (
                     <button
                         key={index}
+                        type="button"
                         onClick={() => setCurrentIndex(index)}
+                        aria-label={`Go to slide ${index + 1}`}
+                        aria-current={index === currentIndex ? 'true' : undefined}
                         className={`w-2 h-2 rounded-full transition-all ${
                             index === currentIndex
                                 ? 'bg-light-accent-500 w-4'

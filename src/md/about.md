@@ -1,7 +1,7 @@
 ---
 title: "About Me"
 ---
-# About me
+## About me
 
 Hi! I'm Javier. I’m a Software Engineering student based in Oviedo. My approach is rooted in the belief that software should be predictable for clients and sustainable for developers.
 
