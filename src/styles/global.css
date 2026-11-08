@@ -4,10 +4,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-#background {
-    will-change: transform;
-}
-
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;

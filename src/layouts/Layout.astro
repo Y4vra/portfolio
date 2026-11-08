@@ -29,10 +29,19 @@ const ogImage = new URL(`${import.meta.env.BASE_URL}/projectImages/visual-oscill
 		<meta name="color-scheme" content="light dark" />
 		<script is:inline>
 			(function () {
+				var mq = window.matchMedia("(prefers-color-scheme: dark)");
 				var stored = null;
-				try { stored = localStorage.getItem("theme"); } catch (e) {}
-				var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-				document.documentElement.classList.toggle("dark", dark);
+				try {
+					localStorage.removeItem("theme");
+					stored = sessionStorage.getItem("theme");
+				} catch (e) {}
+				var apply = function (dark) { document.documentElement.classList.toggle("dark", dark); };
+				apply(stored ? stored === "dark" : mq.matches);
+
+				mq.addEventListener("change", function (e) {
+					try { sessionStorage.removeItem("theme"); } catch (err) {}
+					apply(e.matches);
+				});
 			})();
 		</script>
 	</head>
@@ -40,20 +49,11 @@ const ogImage = new URL(`${import.meta.env.BASE_URL}/projectImages/visual-oscill
 		bg-light-bg dark:bg-dark-bg
 		text-light-main-900 dark:text-dark-main-50">
 		<slot name="navigation"/>
-		<div
+		<canvas
 		id="background"
 		aria-hidden="true"
-		class="bg-dots-pattern fixed inset-0 z-0 -bottom-[20%] h-[120vh] w-full bg-repeat bg-center"
-		></div>
-		<style is:global>
-		/* LIGHT MODE (Purple) */
-		.bg-dots-pattern {
-			background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='rgb%28108%2041%20255%29' fill-opacity='0.4'%3E%3Ccircle cx='10' cy='10' r='1.5'/%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
-		}
-		.dark .bg-dots-pattern {
-			background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='rgb%28255%20201%2063%29' fill-opacity='0.4'%3E%3Ccircle cx='10' cy='10' r='1.5'/%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
-		}
-		</style>
+		class="fixed inset-0 z-0 h-full w-full pointer-events-none"
+		></canvas>
 		<main class="relative z-10">
 			<slot name="start"/>
 			<slot name="projects"/>
@@ -61,29 +61,133 @@ const ogImage = new URL(`${import.meta.env.BASE_URL}/projectImages/visual-oscill
 			<slot name="contact"/>
 		</main>
 		<script>
-			// Parallax: only recompute when the page actually scrolls or resizes.
-			const background = document.getElementById('background');
-			let ticking = false;
+			const canvas = document.getElementById('background') as HTMLCanvasElement | null;
+			const ctx = canvas?.getContext('2d');
 
-			function moveBackground() {
-				ticking = false;
-				if (!background) return;
-				const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-				const scrollPercent = maxScroll > 0 ? window.scrollY / maxScroll : 0;
-				const moveAmount = scrollPercent * 100; // Moves it exactly 100px over the whole page
-				background.style.transform = `translate3d(0, ${-moveAmount}px, 0)`;
+			if (canvas && ctx) {
+				const SPACING = 40;
+				const BASE_RADIUS = 1.5;
+				const BASE_ALPHA = 0.4;
+				const ALPHA_BUCKETS = 8;
+
+				// [direction (deg), wavelength (px), speed (px/s), amplitude (px)]
+				const WAVES = [
+					[  82, 380, 13, 11],
+					[  96, 260, 10,  6],
+					[  70, 190,  8,  4],
+					[  88, 610,  7,  8],
+				].map(([deg, len, speed, amp]) => {
+					const r = (deg * Math.PI) / 180;
+					const k = (2 * Math.PI) / len;
+					return { dx: Math.cos(r), dy: Math.sin(r), k, w: k * speed, amp };
+				});
+				const AMP_SUM = WAVES.reduce((s, w) => s + w.amp, 0);
+				const STEEPNESS = 0.55;
+
+				const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+				let width = 0, height = 0, dpr = 1;
+				let color = '108 41 255';
+				let rafId = 0;
+				let scrollOffset = 0;
+
+				const readColor = () => {
+					color = document.documentElement.classList.contains('dark')
+						? '255 201 63'
+						: '108 41 255';
+				};
+
+				const resize = () => {
+					dpr = Math.min(window.devicePixelRatio || 1, 2);
+					width = canvas.clientWidth || window.innerWidth;
+					height = canvas.clientHeight || window.innerHeight;
+					canvas.width = Math.round(width * dpr);
+					canvas.height = Math.round(height * dpr);
+					ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+				};
+
+				const updateScroll = () => {
+					const max = document.documentElement.scrollHeight - window.innerHeight;
+					scrollOffset = max > 0 ? (window.scrollY / max) * 100 : 0;
+				};
+
+				const buckets: number[][] = Array.from({ length: ALPHA_BUCKETS }, () => []);
+
+				const draw = (timeMs: number) => {
+					const t = timeMs / 1000;
+					ctx.clearRect(0, 0, width, height);
+					for (const b of buckets) b.length = 0;
+
+					const margin = AMP_SUM + SPACING;
+					const yShift = -scrollOffset;
+
+					const ROW = SPACING / 2;
+					const gyStart = Math.floor((-margin - yShift) / ROW) * ROW;
+					const gyEnd = height + margin - yShift;
+					for (let gy = gyStart; gy < gyEnd; gy += ROW) {
+						const row = Math.round(gy / ROW);
+						const xStart = (row & 1 ? SPACING * 0.75 : SPACING * 0.25) - margin;
+						for (let gx = xStart; gx < width + margin; gx += SPACING) {
+							const py = gy + yShift;
+							let ox = 0, oy = 0, h = 0;
+							for (const wv of WAVES) {
+								const phase = wv.k * (wv.dx * gx + wv.dy * py) - wv.w * t;
+								const c = Math.cos(phase);
+								const s = Math.sin(phase);
+								ox += STEEPNESS * wv.amp * wv.dx * c;
+								oy += STEEPNESS * wv.amp * wv.dy * c;
+								h += wv.amp * s;
+							}
+							const n = h / AMP_SUM;
+							const x = gx + ox;
+							const y = py + oy - h * 0.6;
+							const r = BASE_RADIUS * (1 + n * 0.25);
+							const bi = Math.max(0, Math.min(ALPHA_BUCKETS - 1, Math.floor(((n + 1) / 2) * ALPHA_BUCKETS)));
+							buckets[bi].push(x, y, r);
+						}
+					}
+
+					for (let i = 0; i < ALPHA_BUCKETS; i++) {
+						const pts = buckets[i];
+						if (!pts.length) continue;
+						const n = ((i + 0.5) / ALPHA_BUCKETS) * 2 - 1;
+						const alpha = Math.max(0.28, Math.min(0.9, BASE_ALPHA * (1 + n * 0.3)));
+						ctx.fillStyle = `rgb(${color} / ${alpha})`;
+						ctx.beginPath();
+						for (let j = 0; j < pts.length; j += 3) {
+							ctx.moveTo(pts[j] + pts[j + 2], pts[j + 1]);
+							ctx.arc(pts[j], pts[j + 1], pts[j + 2], 0, Math.PI * 2);
+						}
+						ctx.fill();
+					}
+				};
+
+				const loop = (time: number) => {
+					draw(time);
+					rafId = requestAnimationFrame(loop);
+				};
+
+				const start = () => {
+					cancelAnimationFrame(rafId);
+					if (reduceMotion.matches || document.hidden) {
+						draw(0);
+					} else {
+						rafId = requestAnimationFrame(loop);
+					}
+				};
+
+				readColor();
+				resize();
+				updateScroll();
+				start();
+
+				window.addEventListener('resize', () => { resize(); if (reduceMotion.matches) draw(0); });
+				window.addEventListener('scroll', () => { updateScroll(); if (reduceMotion.matches) draw(0); }, { passive: true });
+				document.addEventListener('visibilitychange', start);
+				reduceMotion.addEventListener('change', start);
+
+				new MutationObserver(() => { readColor(); if (reduceMotion.matches) draw(0); })
+					.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 			}
-
-			function requestMove() {
-				if (!ticking) {
-					ticking = true;
-					requestAnimationFrame(moveBackground);
-				}
-			}
-
-			window.addEventListener('scroll', requestMove, { passive: true });
-			window.addEventListener('resize', requestMove);
-			requestMove();
 		</script>
 	</body>
 </html>

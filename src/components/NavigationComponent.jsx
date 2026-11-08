@@ -10,15 +10,18 @@ function ThemeToggle() {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    // The inline script in Layout.astro already applied the theme before paint.
-    setIsDark(document.documentElement.classList.contains('dark'));
+    const root = document.documentElement;
+    const sync = () => setIsDark(root.classList.contains('dark'));
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
   }, []);
 
   const toggleTheme = () => {
     const next = !isDark;
     document.documentElement.classList.toggle('dark', next);
-    try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch (e) { /* storage unavailable */ }
-    setIsDark(next);
+    try { sessionStorage.setItem('theme', next ? 'dark' : 'light'); } catch (e) { }
   };
 
   return (
@@ -106,7 +109,6 @@ export default function NavBar() {
         </a>
 
         <div className="flex items-center gap-6 h-full">
-          {/* Desktop links */}
           <div className="hidden md:flex items-center gap-6 h-full">
             {LINKS.map(({ hash, label }) => (
               <a key={hash} href={hash} className={getLinkClass(hash)} aria-current={activeHash === hash ? 'true' : undefined}>
@@ -115,10 +117,8 @@ export default function NavBar() {
             ))}
           </div>
 
-          {/* Theme toggle: visible on every screen size */}
           <ThemeToggle />
 
-          {/* Mobile toggle */}
           <button
             type="button"
             onClick={toggleSidebar}
@@ -134,7 +134,6 @@ export default function NavBar() {
         </div>
       </nav>
 
-      {/* Mobile menu: inert while closed so it can't be reached with the keyboard */}
       <div
         id="mobile-menu"
         inert={!sidebarOpen}
